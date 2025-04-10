@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validador de CPF</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        input[type="text"] {
+            padding: 8px;
+            width: 200px;
+        }
+        button {
+            padding: 8px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        .valid {
+            background-color: #dff0d8;
+            color: #3c763d;
+        }
+        .invalid {
+            background-color: #f2dede;
+            color: #a94442;
+        }
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Validador de CPF</h1>
+    
+    <form action="/verificar-cpf" method="POST">
+        <div class="form-group">
+            <label for="cpf">Digite o CPF (apenas números):</label>
+            <input type="text" id="cpf" name="cpf" maxlength="11" required>
+        </div>
+        <button type="submit">Verificar</button>
+    </form>
+
+    <% if (error) { %>
+        <div class="error">
+            <%= error %>
+        </div>
+    <% } %>
+
+    <% if (result) { %>
+        <div class="result <%= result.isValid ? 'valid' : 'invalid' %>">
+            <h3>Resultado:</h3>
+            <p>CPF: <%= result.cpf %></p>
+            <p>Status: <%= result.isValid ? 'VÁLIDO' : 'INVÁLIDO' %></p>
+            <p><em><%= result.message %></em></p>
+        </div>
+    <% } %>
+</body>
+</html>
